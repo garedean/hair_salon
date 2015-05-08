@@ -58,8 +58,19 @@ delete('/stylists') do
   redirect to('/stylists')
 end
 
+get('/clients') do
+  @clients = Client.all
+  erb(:clients)
+end
+
 get('/clients/new') do
   erb(:client_form)
+end
+
+get('/stylists/:id') do
+  id = params.fetch("id").to_i
+  @client = Client.find(id: id).first
+  erb(:client)
 end
 
 get('/clients/:id') do
@@ -78,16 +89,18 @@ post('/clients') do
 end
 
 patch('/clients') do
-  stylist_id = params.fetch("id").to_i
+  client_id  = params.fetch("id").to_i
   first_name = params.fetch("first_name")
   last_name  = params.fetch("last_name")
-  client     = Client.find(id: id).first
+  stylist_id = params.fetch("stylist_id").to_i
+
+  client     = Client.find(id: client_id).first
   client.update(first_name: first_name, last_name: last_name)
   client.assign_stylist(stylist_id)
   redirect back
 end
 
-delete('clients') do
+delete('/clients') do
   id = params.fetch("id").to_i
   client = Client.find(id: id).first
   client.delete
