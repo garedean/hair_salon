@@ -23,7 +23,7 @@
         <div class="form-group">
           <label target="stylist">Stylist Assignment
           <% if @client.stylist %>
-              (assigned to <%= @client.stylist.full_name %>):
+              (assigned to <a href="/stylists/<%= @client.stylist.id %>"><%= @client.stylist.full_name %></a>):
             <% else %>
               (unassigned):
             <% end %>

@@ -31,6 +31,7 @@ class Stylist
 
   define_method(:delete) do
     DB.exec("DELETE FROM stylists WHERE id=#{@id};")
+    DB.exec("UPDATE clients SET stylist_id=NULL WHERE stylist_id=#{@id};")
   end
 
   define_method(:update) do |options|
