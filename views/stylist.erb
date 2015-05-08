@@ -1,0 +1,25 @@
+<h1 class="page-header text-center"><%= @stylist.full_name %></h1>
+
+<p class="text-center lead">Stylist at Lluminaire Salon</p>
+
+<div class="row move-down">
+  <div class="col-sm-6 col-sm-offset-3">
+
+    <form action="/stylists/<%= @stylist.id %>" method="post">
+      <input type="hidden" name="_method" value="patch">
+
+      <div class="form-group form-inline no-wrap">
+        <input id="first_name" name="first_name" class="form-control half-width" value="<%= @stylist.first_name %>"placeholder="First Name" required>
+        <input id="last_name" name="last_name" class="form-control half-width" value="<%= @stylist.last_name %>" placeholder="Last Name" required>
+      </div>
+
+      <button type="submit" class="btn btn-success stretch">Update</button>
+    </form>
+
+    <form actions="/stylist" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <button class="btn btn-danger stretch">Delete</a>
+      </form>
+    </div>
+  </div>
+  <a href="/stylists" class="back-link">< Back</a>
