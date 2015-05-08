@@ -14,7 +14,7 @@ class Client
   end
 
   define_method(:save) do
-    id = DB.exec("INSERT INTO clients (first_name, last_name) VALUES ('#{@first_name}', '#{@last_name}') RETURNING id;")
+    id = DB.exec("INSERT INTO clients (first_name, last_name, stylist_id) VALUES ('#{@first_name}', '#{@last_name}', NULL) RETURNING id;")
     @id = id.first.fetch("id").to_i
     self
   end
@@ -39,7 +39,22 @@ class Client
   end
 
   define_method(:assign_stylist) do |id|
-    DB.exec("INSERT INTO clients SET stylist_id=#{id} WHERE id=#{@id};")
+    DB.exec("UPDATE clients SET stylist_id=#{id} WHERE id=#{@id};")
+  end
+
+  define_method(:unassign_stylist) do
+    DB.exec("UPDATE clients SET stylist_id=NULL WHERE id=#{@id};")
+  end
+
+  define_method(:stylist) do
+    returned_stylist = DB.exec("SELECT stylist_id FROM clients WHERE id=#{@id};")
+    stylist_id = returned_stylist.first["stylist_id"]
+
+    if stylist_id
+      Stylist.find(id: stylist_id.to_i).first
+    else
+      nil
+    end
   end
 
   define_singleton_method(:find) do |options|
