@@ -10,20 +10,33 @@
       <input type="hidden" name="id" value="<%= @client.id %>">
 
       <div class="form-group">
-        <label target="first_name">First name:</label>
         <input id="first_name" name="first_name" class="form-control capitalize" value="<%= @client.first_name %>"placeholder="First Name" required>
       </div>
 
       <div class="form-group">
-        <label target="last_name">Last name:</label>
         <input id="last_name" name="last_name" class="form-control capitalize" value="<%= @client.last_name %>" placeholder="Last Name" required>
       </div>
 
       <div class="form-group">
-        <label target="stylist">Stylist Assignment:</label>
-        <select id="stylist" class="form-control">
+        <label target="stylist">Stylist Assignment (currently
+          <% if @client.stylist %>
+            assigned to <%= @client.stylist.full_name %>):
+          <% else %>
+            unassigned):
+          <% end %>
+        </label>
+
+        <select id="stylist" class="form-control" name="stylist_id">
+          <option></option>
           <% @stylists.each do |stylist| %>
-          <option value="<%= stylist.id %>"><%= stylist.full_name %></option>
+            <option value="<%= stylist.id %>"
+              <% if @client.stylist && @client.stylist.full_name == stylist.full_name%>
+                selected
+              <% end %>>
+
+              <%= stylist.full_name %>
+
+            </option>
           <% end %>
         </select>
       </div>
