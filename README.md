@@ -10,14 +10,13 @@ Boot up a local Sinatra server (localhost:4567) and navigate to the root directo
 
 #Database Setup, PSQL
 
-username=# CREATE DATABASE hair_salon;
-username=# \c hair_salon;
-hair_salon=# CREATE TABLE stylists (id serial PRIMARY KEY, first_name varchar, last_name varchar);
-hair_salon=# CREATE TABLE clients (id serial PRIMARY KEY, first_name varchar, last_name varchar, stylist_id int);
-
-After setting up the hair_salon database, use the following to create a 'test' database using it as a template:
-
-CREATE DATABASE hair_salon_test WITH TEMPLATE hair_salon;
+```
+username=# CREATE DATABASE hair_salon;  
+username=# \c hair_salon;  
+hair_salon=# CREATE TABLE stylists (id serial PRIMARY KEY, first_name varchar, last_name varchar);  
+hair_salon=# CREATE TABLE clients (id serial PRIMARY KEY, first_name varchar, last_name varchar,   stylist_id int);  
+hair_salon=# CREATE DATABASE hair_salon_test WITH TEMPLATE hair_salon; (this will create a copy of hair_salon named 'hair_salon_test' used for testing)
+```
 
 #Copyright and license
 
