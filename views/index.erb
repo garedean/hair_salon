@@ -3,15 +3,26 @@
 <div class="row move-down">
   <!--<p class="text-center lead">Please select an option below:</p>-->
   <div class="col-sm-6 col-sm-offset-3 text-center">
-    <a href="/stylists" class="btn btn-default stretch" role="button">Stylists
-      <% unless @stylist_count == 0 %>
+
+    <% if @stylist_count.eql?(0) %>
+      <a href="/stylists/new" class="btn btn-default stretch" role="button">
+        No stylists exist, click to add
+      </a>
+    <% else %>
+      <a href="/stylists" class="btn btn-default stretch" role="button">Stylists
         (<%= @stylist_count %> total)
-      <% end %>
+      </a>
+    <% end %>
+
+    <% if @client_count.eql?(0) %>
+    <a href="/clients/new" class="btn btn-default stretch" role="button">
+      No clients exist, click to add
     </a>
-    <a href="/clients" class="btn btn-default stretch" role="button">Clients
-      <% unless @stylist_count == 0 %>
-        (<%= @client_count %> total)
-      <% end %>
+    <% else %>
+    <a href="/clients" class="btn btn-default stretch" role="button">Stylists
+      (<%= @stylist_count %> total)
     </a>
+    <% end %>
+
   </div>
 </div>

@@ -2,24 +2,46 @@
 
 <p class="text-center lead">Stylist at Lluminaire Salon</p>
 
-<div class="row move-down">
-  <div class="col-sm-6 col-sm-offset-3">
+<div class="row bump-down">
+  <div class="col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-4">
 
-    <form action="/stylists/<%= @stylist.id %>" method="post">
+    <h4><%= @stylist.first_name %>'s info:</h4>
+
+    <form action="/stylists" method="post">
       <input type="hidden" name="_method" value="patch">
+      <input type="hidden" name="id" value="<%= @stylist.id %>">
 
-      <div class="form-group form-inline no-wrap">
-        <input id="first_name" name="first_name" class="form-control half-width" value="<%= @stylist.first_name %>"placeholder="First Name" required>
-        <input id="last_name" name="last_name" class="form-control half-width" value="<%= @stylist.last_name %>" placeholder="Last Name" required>
+      <div class="form-group">
+        <input id="first_name" name="first_name" class="form-control capitalize" value="<%= @stylist.first_name %>"placeholder="First Name" required>
+      </div>
+      <div class="form-group">
+        <input id="last_name" name="last_name" class="form-control capitalize" value="<%= @stylist.last_name %>" placeholder="Last Name" required>
       </div>
 
       <button type="submit" class="btn btn-success stretch">Update</button>
     </form>
 
-    <form actions="/stylist" method="post">
+    <form action="/stylists" method="post">
       <input type="hidden" name="_method" value="delete">
+      <input type="hidden" name="id" value="<%= @stylist.id %>">
       <button class="btn btn-danger stretch">Delete</a>
-      </form>
-    </div>
+    </form>
+
   </div>
-  <a href="/stylists" class="back-link">< Back</a>
+</div>
+
+<div class="row bump-down">
+  <div class="col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-4">
+    <h4><%= @stylist.first_name %>'s Clients:</h4>
+
+  </div>
+</div>
+
+<div class="row bump-down">
+  <div class="col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-4">
+    <h4>Assign an unassigned client to <%= @stylist.first_name %>:</h4>
+
+  </div>
+</div>
+
+<a href="/stylists" class="back-link">< Back</a>

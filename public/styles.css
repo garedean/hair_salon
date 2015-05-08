@@ -41,3 +41,13 @@ input.form-control.half-width {
 .capitalize {
   text-transform: capitalize;
 }
+
+.lookup-results {
+  -webkit-padding-start: 0px;
+}
+
+.lookup-results li {
+  list-style-type: none;
+  font-size: 20px;
+  margin
+}

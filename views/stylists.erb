@@ -1,7 +1,7 @@
 <h1 class="page-header text-center">Stylists</h1>
 
 <div class="row move-down">
-  <div class="col-sm-6 col-sm-offset-3">
+  <div class="col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-4">
     <% if Stylist.all.empty? %>
       <p class="lead text-center">You don't have any stylists yet. <a href="/stylists/new" class="btn btn-primary stretch bump-down" role="button">Add one!</a></p>
     <% else %>
@@ -14,6 +14,18 @@
       </form>
     <% end %>
   </div>
+
+  <% unless @stylists.empty? %>
+    <div class="col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-4">
+      <h3>Lookup results:</h3>
+      <ul class="lookup-results">
+        <% @stylists.each do |stylist| %>
+          <li><a href="/stylists/<%= stylist.id %>"><%= stylist.full_name %></a></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
 </div>
 
 <a href="/" class="back-link">< Back</a>
