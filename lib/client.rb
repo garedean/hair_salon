@@ -82,9 +82,7 @@ class Client
         clients << Client.new(id: id, first_name: first_name, last_name: last_name)
       end
     end
-
     clients
-
   end
 
   # Returns an array of client objects

@@ -29,14 +29,38 @@ describe("the hair salon app", :type => :feature) do
     end
   end
 
-  describe("stylist page") do
-    it('allows a user to update the stylist name') do
+  describe("stylist page for a single stylist") do
+    it('allows a user to update the stylist first and last name') do
       stylist = add_stylist("Lindsay", "Culver")
       visit("/stylists/#{stylist.id}")
       fill_in('first_name', with: "Bill")
       fill_in('last_name', with: "Brasky")
       click_button('Update')
       expect(page).to(have_content("Bill Brasky"))
+    end
+
+    it('allows a user to delete a stylist') do
+      stylist = add_stylist("Lindsay", "Culver")
+      visit("/stylists/#{stylist.id}")
+      click_button('Delete')
+      expect(page).not_to(have_content("Lindsay Culver"))
+    end
+  end
+
+  describe("stylists page listing all stylists") do
+    it('lists all stylists') do
+      stylist = add_stylist("Lindsay", "Culver")
+      stylist = add_stylist("Bill", "Brasky")
+      visit("/stylists")
+      expect(page).to(have_content("Lindsay Culver"))
+      expect(page).to(have_content("Bill Brasky"))
+    end
+
+    it('allows a user to delete a stylist') do
+      stylist = add_stylist("Lindsay", "Culver")
+      visit("/stylists/#{stylist.id}")
+      click_button('Delete')
+      expect(page).not_to(have_content("Lindsay Culver"))
     end
   end
 end

@@ -92,7 +92,7 @@ patch('/clients') do
   client_id  = params.fetch("id").to_i
   first_name = params.fetch("first_name")
   last_name  = params.fetch("last_name")
-  stylist_id = params.fetch("stylist_id").to_i
+  stylist_id = params.fetch("stylist_id", nil).to_i
 
   client     = Client.find(id: client_id).first
   client.update(first_name: first_name, last_name: last_name)

@@ -32,15 +32,18 @@
 
 <div class="row bump-down">
   <div class="col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-4">
-    <h4><%= @stylist.first_name %>'s Clients:</h4>
 
-  </div>
-</div>
+    <% if @stylist.clients.empty? %>
+      <p class="text-center lead bump-down"><%= @stylist.first_name %> doesn't have any clients yet.</p>
+    <% else %>
+      <ul class="lookup-results">
+        <h4><%= @stylist.first_name %>'s Clients:</h4>
 
-<div class="row bump-down">
-  <div class="col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-4">
-    <h4>Assign an unassigned client to <%= @stylist.first_name %>:</h4>
-
+        <% @stylist.clients.each do |client| %>
+        <li><a href="/clients/<%= client.id %>"><%= client.full_name %></a></li>
+        <% end %>
+      </ul>
+    <% end %>
   </div>
 </div>
 

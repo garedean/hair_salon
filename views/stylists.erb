@@ -3,7 +3,7 @@
 <div class="row move-down">
   <div class="col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-4">
     <% if Stylist.all.empty? %>
-      <p class="lead text-center">You don't have any stylists yet. <a href="/stylists/new" class="btn btn-primary stretch bump-down" role="button">Add one!</a></p>
+      <p class="lead text-center">Looks like you're running low on stylists.<a href="/stylists/new" class="btn btn-primary stretch bump-down" role="button">Add one!</a></p>
     <% else %>
       <form action="/stylists">
         <div class="form-group">
