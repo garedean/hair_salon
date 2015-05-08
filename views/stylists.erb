@@ -3,15 +3,15 @@
 <div class="row move-down">
   <div class="col-sm-6 col-sm-offset-3">
     <% if Stylist.all.empty? %>
-    <p class="lead text-center">You don't have any stylists yet. <a href="/stylists/new" class="btn btn-primary stretch bump-down" role="button">Add one!</a></p>
+      <p class="lead text-center">You don't have any stylists yet. <a href="/stylists/new" class="btn btn-primary stretch bump-down" role="button">Add one!</a></p>
     <% else %>
-    <form action="/books/lookup/results" method="post">
-      <div class="form-group">
-        <label target="title">Lookup a Stylist or <a href="/stylists/new">add one</a>:</label>
-        <input id="title" name="title" class="form-control">
-      </div>
-      <button type="submit" class="btn btn-primary stretch">Search</button>
-    </form>
+      <form action="/stylists">
+        <div class="form-group">
+          <label target="title">Lookup a Stylist or <a href="/stylists/new">add one</a>:</label>
+          <input id="name" name="name" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary stretch">Search</button>
+      </form>
     <% end %>
   </div>
 </div>

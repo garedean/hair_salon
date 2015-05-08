@@ -9,3 +9,35 @@
   bottom: 5px;
   left: 5px;
 }
+
+.move-down {
+  margin-top: 80px;
+}
+
+.bump-down {
+  margin-top: 30px;
+}
+
+a.back-link {
+  display: inline-block;
+  position: absolute;
+  top: 500px;
+}
+
+a.stretch,
+button.stretch {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.no-wrap {
+  white-space: nowrap;
+}
+
+input.form-control.half-width {
+  width: 50%;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}

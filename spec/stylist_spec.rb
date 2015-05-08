@@ -43,19 +43,19 @@ describe('Stylist') do
     it('will update a stylist first name') do
       stylist = add_stylist('Lindsay', 'Culver')
       stylist.update(first_name: 'Lindz')
-      expect(Stylist.find(stylist.id).first_name).to(eq("Lindz"))
+      expect(Stylist.find(id: stylist.id).first.first_name).to(eq("Lindz"))
     end
 
     it('will update a stylist last name') do
       stylist = add_stylist('Lindsay', 'Culver')
       stylist.update(last_name: 'Culvz')
-      expect(Stylist.find(stylist.id).last_name).to(eq("Culvz"))
+      expect(Stylist.find(id: stylist.id).first.last_name).to(eq("Culvz"))
     end
 
     it('will update a stylist first and last name at the same time') do
       stylist = add_stylist('Lindsay', 'Culver')
       stylist.update(first_name: "Lindz", last_name: 'Culvz')
-      expect(Stylist.find(stylist.id).full_name).to(eq("Lindz Culvz"))
+      expect(Stylist.find(id: stylist.id).first.full_name).to(eq("Lindz Culvz"))
     end
   end
 
@@ -69,11 +69,23 @@ describe('Stylist') do
     end
   end
 
-  describe('#find(id)') do
-    it('returns a specific stylist object out of many') do
+  describe('#find') do
+    it('returns an array containing one stylist object when searching by id') do
       stylist1 = add_stylist('Lindsay', 'Culver')
       stylist2 = add_stylist('Garrett', 'Olson')
-      expect(Stylist.find(stylist1.id)).to(eq(stylist1))
+      expect(Stylist.find(id: stylist1.id)).to(eq([stylist1]))
+    end
+
+    it('returns an array containing one stylist object when searching by part of a name (e.g. first name)') do
+      stylist1 = add_stylist('Lindsay', 'Culver')
+      stylist2 = add_stylist('Garrett', 'Olson')
+      expect(Stylist.find(name: stylist1.first_name)).to(eq([stylist1]))
+    end
+
+    it('returns an array containing one stylist object when searching by full name') do
+      stylist1 = add_stylist('Lindsay', 'Culver')
+      stylist2 = add_stylist('Garrett', 'Olson')
+      expect(Stylist.find(name: stylist1.full_name)).to(eq([stylist1]))
     end
   end
 
