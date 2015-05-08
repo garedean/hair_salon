@@ -21,9 +21,8 @@ get('/') do
 end
 
 get('/stylists') do
-  target_name = params.fetch("name")
-
-  @stylists = Stylist.find(name: target_name)
+  #@stylists = Stylist.find(name: target_name)
+  @stylists = Stylist.all
   erb(:stylists)
 end
 
@@ -40,6 +39,6 @@ end
 
 get('/stylists/:id') do
   id = params.fetch("id").to_i
-  @stylist = Stylist.find(id)
+  @stylist = Stylist.find(id: id).first
   erb(:stylist)
 end
