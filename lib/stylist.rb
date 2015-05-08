@@ -13,6 +13,16 @@ class Stylist
     @last_name  == other_stylist.last_name
   end
 
+  define_method(:clients) do
+    returned_clients = DB.exec("SELECT ID FROM clients WHERE stylist_id=#{@id};")
+    clients = []
+    returned_clients.each do |client|
+      id         = client.fetch("id").to_i
+      clients << Client.find(id: id).first
+    end
+    clients
+  end
+
   define_method(:save) do
     id = DB.exec("INSERT INTO stylists (first_name, last_name) VALUES ('#{@first_name}', '#{@last_name}') RETURNING id;")
     @id = id.first.fetch("id").to_i
@@ -38,7 +48,6 @@ class Stylist
     end
   end
 
-  # Returns a single stylist object
   define_singleton_method(:find) do |options|
     target_id   = options.fetch(:id, nil)
     target_name = options.fetch(:name, nil)
