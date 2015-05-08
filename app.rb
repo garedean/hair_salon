@@ -96,7 +96,12 @@ patch('/clients') do
 
   client     = Client.find(id: client_id).first
   client.update(first_name: first_name, last_name: last_name)
-  client.assign_stylist(stylist_id)
+
+  if stylist_id > 0
+    client.assign_stylist(stylist_id.to_i)
+  else
+    client.unassign_stylist
+  end
   redirect back
 end
 
