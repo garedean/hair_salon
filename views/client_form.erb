@@ -1,29 +1,17 @@
-<h1 class="page-header text-center">Add a New Book</h1>
+<h1 class="page-header text-center">Add a New Client</h1>
 
 <div class="row move-down">
-  <div class="col-sm-6 col-sm-offset-3">
-    <form action="/books" method="post">
+  <div class="col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-4">
+    <form action="/clients" method="post">
       <div class="form-group">
-        <label target="title">Book Title:</label>
-        <input id="title" name="title" class="form-control" autofocus required>
+        <input id="first_name" name="first_name" class="form-control capitalize" placeholder="First Name" required>
       </div>
-
-      <label>Author 1</label>
-
-      <div class="form-group form-inline no-wrap">
-        <input id="first_name1" name="first_name1" class="form-control half-width" placeholder="First Name" required>
-        <input id="last_name1" name="last_name1" class="form-control half-width" placeholder="Last Name" required>
+      <div class="form-group">
+        <input id="last_name" name="last_name" class="form-control capitalize" placeholder="Last Name" required>
       </div>
-
-      <label>Author 2 (optional)</label>
-
-      <div class="form-group form-inline no-wrap">
-        <input id="first_name2" name="first_name2" class="form-control half-width" placeholder="First Name">
-        <input id="last_name2" name="last_name2" class="form-control half-width" placeholder="Last Name">
-      </div>
-      <button type="submit" class="btn btn-primary">Add</button>
+      <button type="submit" class="btn btn-primary stretch">Add Client</button>
     </form>
   </div>
 </div>
 
-<a href="/books/home" class="back-link">< Back</a>
+<a href="/clients" class="back-link">< Back</a>

@@ -1,9 +1,8 @@
 class Client
-  attr_reader(:id, :client_id, :first_name, :last_name, :full_name)
+  attr_reader(:id, :first_name, :last_name, :full_name)
 
   define_method(:initialize) do |attributes|
     @id         = attributes.fetch(:id)
-    @client_id = attributes.fetch(:client_id)
     @first_name = attributes.fetch(:first_name)
     @last_name  = attributes.fetch(:last_name)
     @full_name  = "#{first_name} #{last_name}"
@@ -39,12 +38,38 @@ class Client
     end
   end
 
-  # Returns a single client object
-  define_singleton_method(:find) do |id|
-    returned_client = DB.exec("SELECT * FROM clients WHERE id=#{id};").first
-    first_name = returned_client.fetch("first_name")
-    last_name  = returned_client.fetch("last_name")
-    client.new(id: id, first_name: first_name, last_name: last_name).save()
+  define_method(:assign_stylist) do |id|
+    DB.exec("INSERT INTO clients SET stylist_id=#{id} WHERE id=#{@id};")
+  end
+
+  define_singleton_method(:find) do |options|
+    target_id   = options.fetch(:id, nil)
+    target_name = options.fetch(:name, nil)
+
+    clients = []
+
+    # Not expecting user to search by id and name
+    if target_id
+      returned_client = DB.exec("SELECT * FROM clients WHERE id=#{target_id};").first
+      id         = returned_client.fetch("id").to_i
+      first_name = returned_client.fetch("first_name")
+      last_name  = returned_client.fetch("last_name")
+      clients << Client.new(id: id, first_name: first_name, last_name: last_name)
+    end
+
+    if target_name
+      clients = []
+      returned_clients = DB.exec("SELECT * FROM clients WHERE first_name LIKE '%#{target_name}%';")
+      returned_clients.each do |client|
+        id         = returned_client.fetch("id").to_i
+        first_name = returned_client.fetch("first_name")
+        last_name  = returned_client.fetch("last_name")
+        clients << Client.new(id: id, first_name: first_name, last_name: last_name)
+      end
+    end
+
+    clients
+
   end
 
   # Returns an array of client objects
@@ -53,10 +78,9 @@ class Client
     returned_clients = DB.exec("SELECT * FROM clients")
     returned_clients.each do |client|
       id         = client.fetch("id").to_i
-      stylist_id = client.fetch("stylist_id").to_i
       first_name = client.fetch("first_name")
       last_name  = client.fetch("last_name")
-      clients << client.new(id: id, first_name: first_name, last_name: last_name)
+      clients << Client.new(id: id, first_name: first_name, last_name: last_name)
     end
     clients
   end

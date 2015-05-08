@@ -62,19 +62,28 @@ get('/clients/new') do
   erb(:client_form)
 end
 
+get('/clients/:id') do
+  id = params.fetch("id").to_i
+  @client = Client.find(id: id).first
+  @stylists = Stylist.all
+
+  erb(:client)
+end
+
 post('/clients') do
   first_name = params.fetch("first_name").capitalize
   last_name  = params.fetch("last_name").capitalize
-  client = Client.new(id: nil, first_name: first_name, last_name: last_name).save()
+  client = Client.new(id: nil, client_id: nil, first_name: first_name, last_name: last_name).save()
   redirect to("/clients/#{client.id}")
 end
 
 patch('/clients') do
-  id         = params.fetch("id").to_i
+  stylist_id = params.fetch("id").to_i
   first_name = params.fetch("first_name")
   last_name  = params.fetch("last_name")
-  client    = Client.find(id: id).first
+  client     = Client.find(id: id).first
   client.update(first_name: first_name, last_name: last_name)
+  client.assign_stylist(stylist_id)
   redirect back
 end
 

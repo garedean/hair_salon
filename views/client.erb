@@ -1,0 +1,43 @@
+<h1 class="page-header text-center"><%= @client.full_name %></h1>
+
+<p class="text-center lead">Client at Lluminaire Salon</p>
+
+<div class="row bump-down">
+  <div class="col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-4">
+
+    <form action="/clients" method="post">
+      <input type="hidden" name="_method" value="patch">
+      <input type="hidden" name="id" value="<%= @client.id %>">
+
+      <div class="form-group">
+        <label target="first_name">First name:</label>
+        <input id="first_name" name="first_name" class="form-control capitalize" value="<%= @client.first_name %>"placeholder="First Name" required>
+      </div>
+
+      <div class="form-group">
+        <label target="last_name">Last name:</label>
+        <input id="last_name" name="last_name" class="form-control capitalize" value="<%= @client.last_name %>" placeholder="Last Name" required>
+      </div>
+
+      <div class="form-group">
+        <label target="stylist">Stylist Assignment:</label>
+        <select id="stylist" class="form-control">
+          <% @stylists.each do |stylist| %>
+          <option value="<%= stylist.id %>"><%= stylist.full_name %></option>
+          <% end %>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-success stretch">Update</button>
+    </form>
+
+    <form action="/clients" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <input type="hidden" name="id" value="<%= @client.id %>">
+      <button class="btn btn-danger stretch">Delete</a>
+      </form>
+
+    </div>
+  </div>
+
+  <a href="/clients" class="back-link">< Back</a>
