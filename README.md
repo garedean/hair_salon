@@ -1,5 +1,7 @@
 ##Hair Salon
 
+Note: due to time constraints, I decided to list out clients and stylists on the search page rather than implement search functionality.
+
 Author: Garrett Olson
 
 Description: the Hair Salon app is a Sinatra application that allows a salon to track clients, stylists, and assign clients to stylists. Each client pledges allegiance to one stylist creating a one (stylist) to many (clients) relationship.
