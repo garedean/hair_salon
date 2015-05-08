@@ -17,31 +17,35 @@
         <input id="last_name" name="last_name" class="form-control capitalize" value="<%= @client.last_name %>" placeholder="Last Name" required>
       </div>
 
-      <div class="form-group">
-        <label target="stylist">Stylist Assignment (currently
+      <% if @stylists.empty? %>
+        <p class="text-center bump-down lead">No stylists exist yet! <a href="/stylists/new">Add one.</a>
+      <% else %>
+        <div class="form-group">
+          <label target="stylist">Stylist Assignment
           <% if @client.stylist %>
-            assigned to <%= @client.stylist.full_name %>):
-          <% else %>
-            unassigned):
-          <% end %>
-        </label>
+              (assigned to <%= @client.stylist.full_name %>):
+            <% else %>
+              (unassigned):
+            <% end %>
+          </label>
 
-        <select id="stylist" class="form-control" name="stylist_id">
-          <option></option>
-          <% @stylists.each do |stylist| %>
-            <option value="<%= stylist.id %>"
-              <% if @client.stylist && @client.stylist.full_name == stylist.full_name%>
-                selected
-              <% end %>>
+          <select id="stylist" class="form-control" name="stylist_id">
+            <option></option>
+            <% @stylists.each do |stylist| %>
+              <option value="<%= stylist.id %>"
+                <% if @client.stylist && @client.stylist.full_name == stylist.full_name%>
+                  selected
+                <% end %>>
 
-              <%= stylist.full_name %>
+                <%= stylist.full_name %>
 
-            </option>
-          <% end %>
-        </select>
-      </div>
+              </option>
+            <% end %>
+          </select>
+        </div>
+      <% end %>
 
-      <button type="submit" class="btn btn-success stretch">Update</button>
+      <button type="submit" class="btn btn-success stretch bump-down">Update</button>
     </form>
 
     <form action="/clients" method="post">

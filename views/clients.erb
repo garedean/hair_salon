@@ -3,7 +3,7 @@
 <div class="row move-down">
   <div class="col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-4">
     <% if Client.all.empty? %>
-    <p class="lead text-center">You don't have any Clients yet. <a href="/clients/new" class="btn btn-primary stretch bump-down" role="button">Add one!</a></p>
+    <p class="lead text-center">Looks like you're all out of clients. <a href="/clients/new" class="btn btn-primary stretch bump-down" role="button">Add one!</a></p>
     <% else %>
     <form action="/clients">
       <div class="form-group">
