@@ -22,4 +22,4 @@ hair_salon=# CREATE DATABASE hair_salon_test WITH TEMPLATE hair_salon; (this wil
 
 #Copyright and license
 
-Code and documentation copyright 2015 Garrett Olson. The Online Dictionary is released under the [MIT license](http://opensource.org/licenses/MIT)
+Code and documentation copyright 2015 Garrett Olson. The online Hair Salon is released under the [MIT license](http://opensource.org/licenses/MIT)
