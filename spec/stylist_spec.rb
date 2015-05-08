@@ -4,6 +4,14 @@ require('spec_helper')
 # instantiating and saving stylists faster. Check out 'spec_helper' for details
 
 describe('Stylist') do
+
+  describe('#==') do
+    it('returns true when two objects are functionally the same') do
+      stylist = add_stylist('Lindsay', 'Culver')
+      expect(Stylist.all).to(eq([stylist]))
+    end
+  end
+
   describe('#id') do
     it('returns the stylist id') do
       stylist = add_stylist('Lindsay', 'Culver')
@@ -69,6 +77,21 @@ describe('Stylist') do
     end
   end
 
+  describe('#clients') do
+    it('returns empty array when no clients are assigned to a stylist') do
+      stylist = add_stylist('Lindsay', 'Culver')
+      expect(stylist.clients).to(eq([]))
+    end
+    it('returns array of clients that are assigned to stylist') do
+      stylist = add_stylist('Lindsay', 'Culver')
+      client1  = add_client('Garrett', 'Olson')
+      client2  = add_client('Brandon', 'LaRose')
+      client1.assign_stylist(stylist.id)
+      client2.assign_stylist(stylist.id)
+      expect(stylist.clients).to(eq([client1, client2]))
+    end
+  end
+
   describe('#find') do
     it('returns an array containing one stylist object when searching by id') do
       stylist1 = add_stylist('Lindsay', 'Culver')
@@ -76,17 +99,17 @@ describe('Stylist') do
       expect(Stylist.find(id: stylist1.id)).to(eq([stylist1]))
     end
 
-    it('returns an array containing one stylist object when searching by part of a name (e.g. first name)') do
-      stylist1 = add_stylist('Lindsay', 'Culver')
-      stylist2 = add_stylist('Garrett', 'Olson')
-      expect(Stylist.find(name: stylist1.first_name)).to(eq([stylist1]))
-    end
+    # it('returns an array containing one stylist object when searching by part of a name (e.g. first name)') do
+    #   stylist1 = add_stylist('Lindsay', 'Culver')
+    #   stylist2 = add_stylist('Garrett', 'Olson')
+    #   expect(Stylist.find(name: stylist1.first_name)).to(eq([stylist1]))
+    # end
 
-    it('returns an array containing one stylist object when searching by full name') do
-      stylist1 = add_stylist('Lindsay', 'Culver')
-      stylist2 = add_stylist('Garrett', 'Olson')
-      expect(Stylist.find(name: stylist1.full_name)).to(eq([stylist1]))
-    end
+    # it('returns an array containing one stylist object when searching by full name') do
+    #   stylist1 = add_stylist('Lindsay', 'Culver')
+    #   stylist2 = add_stylist('Garrett', 'Olson')
+    #   expect(Stylist.find(name: stylist1.full_name)).to(eq([stylist1]))
+    # end
   end
 
   describe('.all') do
